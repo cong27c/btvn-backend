@@ -1,0 +1,67 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "post mới 1",
+      "content": " content"
+    },
+    {
+      "id": 2,
+      "title": "post 2",
+      "content": "content 222"
+    }
+  ],
+  "comments": [
+    {
+      "postId": 1,
+      "content": "sửa comments 2",
+      "author": "Hoàng",
+      "id": 1
+    },
+    {
+      "postId": 2,
+      "content": "comment mới 2",
+      "author": " Công",
+      "id": 2
+    }
+  ],
+  "categories": [
+    {
+      "id": 3,
+      "title": "sửa tiêu đề 2",
+      "content": "nội dung 2"
+    },
+    {
+      "id": 4,
+      "title": "tiêu đề123123",
+      "content": "nội dung 123"
+    },
+    {
+      "id": 5,
+      "title": "tiêu đề123123",
+      "content": "nội dung 123"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "title": "sửa tiêu đề"
+    },
+    {
+      "id": 2,
+      "title": "products 2",
+      "content": "products 2"
+    }
+  ],
+  "todos": [
+    {
+      "id": 1,
+      "title": "sửa tiêu đề"
+    },
+    {
+      "id": 2,
+      "title": "tiêu đề",
+      "content": "nội dung"
+    }
+  ]
+}

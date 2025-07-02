@@ -1,0 +1,186 @@
+<div class="content-header">
+  <h1>Edit User</h1>
+  <div>
+    <a href="/admin/users" class="btn btn-secondary">
+      <i class="fas fa-arrow-left"></i> Back to Users
+    </a>
+    <a
+      href="#"
+      class="btn btn-danger action-btn delete delete-item"
+      id="deleteUserBtn"
+      style="margin-left: 10px"
+      data-id="<%= old?.id ||user.id %>"
+      data-name="<%= old?.name ||user.name %>"
+      title="Delete"
+    >
+      <i class="fas fa-trash"></i> Delete User
+    </a>
+  </div>
+</div>
+
+<!-- Success Message -->
+<div id="successMessage" class="message message-success" style="display: none">
+  <i class="fas fa-check-circle"></i>
+  <span data-message-text>User has been updated successfully.</span>
+</div>
+
+<!-- Edit User Form -->
+<form
+  id="editUserForm"
+  class="card"
+  method="post"
+  action="/admin/users/<%= user.id  %>?_method=PATCH"
+>
+  <div class="card-header">
+    <h3>User Information</h3>
+  </div>
+  <div class="card-body">
+    <div class="form-section">
+      <h3>Personal Information</h3>
+      <div class="form-group">
+        <label for="name">Full Name*</label>
+        <input
+          value="<%= old?.name || user.name %>"
+          type="text"
+          id="name"
+          name="name"
+          class="form-control"
+          
+          data-validate="name"
+        />
+        <% if (errors?.name) { %>
+          <span class="error-text" id="userNameError"
+            ><%= errors.name %><</span
+          >
+          <% } %>
+              </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Email*</label>
+          <input
+          value="<%= old?.email || user.email %>"
+
+            type="email"
+            id="userEmail"
+            name="email"
+            class="form-control"
+            
+          />
+          <% if (errors?.email) { %>
+            <span class="error-text" id="userEmailError"
+              ><%= errors.email %><</span
+            >
+            <% } %>        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input
+            value="<%= old?.phone || user.phone %>"
+            type="tel"
+            id="userPhone"
+            name="phone"
+            class="form-control"
+            data-validate="phone"
+          />
+          <% if (errors?.phone) { %>
+            <span class="error-text" id="userPhoneError"
+              ><%= errors.phone %><</span
+            >
+            <% } %>         </div>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address</label>
+        <textarea
+          id="userAddress"
+          name="address"
+          class="form-control"
+          rows="2"
+        ><%= old?.address || user.address %></textarea>
+        <% if (errors?.address) { %>
+          <span class="error-text" id="userAddressError"
+            ><%= errors.address %><</span
+          >
+          <% } %>          </div>
+    </div>
+
+    <div class="form-section">
+      <h3>Account Information</h3>
+      <div class="form-group">
+        <label for="username">Username*</label>
+        <input
+          type="text"
+          id="userUsername"
+          name="username"
+          class="form-control"
+          value="<%= old?.username || user.username %>"
+          
+          data-validate="username"
+        />
+        <% if (errors?.username) { %>
+          <span class="error-text" id="userUsernameError"
+            ><%= errors.username %><</span
+          >
+          <% } %>      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="role">Role*</label>
+          <% const selectedRole = old?.role || user.role; %>
+          <select id="userRole" name="role" class="form-control" >
+            <% const options = [
+            { title: "Select Role", value: "" },
+            { title: "Administrator", value: "admin" },
+            { title: "Editor", value: "editor" },
+            { title: "Viewer", value: "viewer" }
+          ]; %>
+          
+          <% for (let option of options) { %>
+            <option 
+              value="<%= option.value %>" 
+              <%= option.value === selectedRole ? "selected" : "" %>>
+              <%= option.title %>
+            </option>
+          <% } %>
+          </select>
+          <% if (errors?.role) { %>
+            <span class="error-text" id="userRoleError"><%= errors.role %></span>
+          <% } %>        </div>
+
+   
+      </div>
+
+      <div class="form-group">
+        <label for="dateCreated">Date Created</label>
+        <input
+          type="text"
+          id="dateCreated"
+          class="form-control"
+          readonly
+          disabled
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="lastLogin">Last Login</label>
+        <input
+          type="text"
+          id="lastLogin"
+          class="form-control"
+          readonly
+          disabled
+        />
+      </div>
+    </div>
+    <div class="form-buttons">
+      <button type="button" class="btn btn-secondary" id="cancelBtn">
+        Cancel
+      </button>
+      <button type="submit" class="btn btn-primary">
+        <i class="fas fa-save"></i> Save Changes
+      </button>
+    </div>
+  </div>
+</form>
+<script src="/assets/js/userDelete.js"></script>
