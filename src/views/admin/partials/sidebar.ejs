@@ -1,6 +1,9 @@
 <aside class="sidebar">
   <div class="sidebar-logo">
     <h1>Admin Dashboard</h1>
+    <% console.log(auth) %> <% if(auth) { %>
+    <p>Hi, <%= auth.email %></p>
+    <% } %>
   </div>
 
   <nav class="sidebar-menu">

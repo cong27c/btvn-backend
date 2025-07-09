@@ -9,6 +9,7 @@ const expressLayouts = require("express-ejs-layouts");
 const methodOverride = require("method-override");
 const handleSession = require("./src/middlewares/admin/handleSession");
 const cookieParser = require("cookie-parser");
+const shareLocals = require("./src/middlewares/admin/shareLocals");
 
 const app = express();
 const port = 5000;
@@ -27,7 +28,7 @@ app.use(expressLayouts);
 app.set("layout", "admin/layouts/default/index");
 
 app.use("/api/v1", router);
-app.use("/admin", handleSession, adminRouter);
+app.use("/admin", handleSession, shareLocals, adminRouter);
 
 app.use(notFoundHandler);
 

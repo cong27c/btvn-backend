@@ -1,5 +1,8 @@
 <div class="dashboard-header">
   <h1>Dashboard Overview</h1>
+  <% if(auth) { %>
+  <p>Hi, <%= auth.email %></p>
+  <% } %>
 </div>
 
 <!-- Stats Cards -->

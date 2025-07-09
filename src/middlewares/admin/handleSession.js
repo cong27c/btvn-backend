@@ -11,15 +11,15 @@ async function handleSession(req, res, next) {
     _sid = randomUUID();
     const date = new Date();
     session = await sessionModal.create({ sid: _sid });
-    sessionModal.create({ sid: _sid });
 
-    date.setDate(date.getDate() + 1);
+    date.setDate(date.getDate() + 7);
+
     res.set("Set-Cookie", `sid=${_sid}; path=/; httpOnly;expires=${date}`);
   }
 
   let sessionData = JSON.parse(session.data ?? null) ?? {};
 
-  res.session = {
+  req.session = {
     get(key) {
       return sessionData[key] ?? null;
     },
