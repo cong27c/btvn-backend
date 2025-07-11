@@ -16,6 +16,29 @@ body {
     overflow: hidden;
 }
 
+  .flash-message {
+    padding: 12px 16px;
+    margin: 8px 0;
+    border-radius: 6px;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  .flash-message.success {
+    background-color: #4CAF50;
+    border-left: 6px solid #388E3C;
+  }
+
+  .flash-message.error {
+    background-color: #F44336;
+    border-left: 6px solid #D32F2F;
+  }
+
+  .flash-message.warning {
+    background-color: #FFC107;
+    color: #000;
+    border-left: 6px solid #FFA000;
+  }
 /* Typography */
 h1,
 h2,

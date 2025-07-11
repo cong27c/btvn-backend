@@ -18,11 +18,11 @@ class AuthService {
 
   async login({ email, password }) {
     const user = await usersModel.findByEmail(email);
-    console.log("USER:", user);
+
     if (!user) throw new Error("Sai email hoặc mật khẩu");
 
     const match = await bcrypt.compare(password, user.password);
-    console.log(match);
+
     if (!match) throw new Error("Sai email hoặc mật khẩu");
 
     return user;

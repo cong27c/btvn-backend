@@ -10,7 +10,12 @@
       <%- include("../../partials/sidebar.ejs") %>
 
       <!-- Main Content -->
-      <main class="content-wrapper"><%- body %></main>
+      <main class="content-wrapper">
+        <% if(flash) { %> <% for(let item of flash) { %>
+        <p class="flash-message <%= item.type %>"><%= item.message %></p>
+
+        <% } %> <% } %> <%- body %>
+      </main>
     </div>
 
     <!-- Confirm Dialog -->

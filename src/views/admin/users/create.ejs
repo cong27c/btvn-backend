@@ -1,3 +1,9 @@
+<div class="flash-mesage">
+  <% if(flash && flash.mesage) { %>
+  <div><%= flash.message %></div>
+  <% } %>
+</div>
+
 <div class="content-header">
   <h1>Create New User</h1>
   <a href="/admin/users" class="btn btn-secondary">

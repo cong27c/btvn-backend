@@ -27,14 +27,28 @@ exports.login = async (req, res) => {
       password: req.body.password,
     });
 
-    req.session.set("userId", user.id);
-
+    if (user) {
+      req.session.userId = user.id;
+    }
+    req.setFlash({
+      type: "success",
+      message: "Đăng nhập thành công",
+    });
     res.redirect("/admin/dashboard");
   } catch (error) {
+    req.setFlash({
+      type: "error",
+      message: "Đăng nhập thất bại",
+    });
+
     res.render("admin/auth/login", {
       layout: "admin/layouts/auth",
       error: error.message,
       old: { email: req.body.email },
     });
   }
+};
+exports.logout = async (req, res) => {
+  delete req.session.userId;
+  res.redirect("/admin/login");
 };

@@ -4,9 +4,12 @@
     <%- include("../../partials/headAuth.ejs") %>
   </head>
   <body>
-    <tbody>
-      <%- body %>
-    </tbody>
+    <main>
+      <% if(flash) { %> <% for(let item of flash) { %>
+      <p class="flash-message <%= item.type %>"><%= item.message %></p>
+
+      <% } %> <% } %> <%- body %>
+    </main>
 
     <script src="/assets/js/validation.js"></script>
     <script>

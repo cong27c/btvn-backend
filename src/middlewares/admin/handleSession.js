@@ -1,5 +1,7 @@
 const { randomUUID } = require("node:crypto");
 const sessionModal = require("../../models/session.model");
+const { type } = require("node:os");
+
 // 1 Tạo ra session ID (sid) => bằng một chuỗi ngẫu nhiên , ko trùng lặp
 // 2. Gửi phản hồi (server -> client) yêu cầu browser tạo ra cookie sid=xxx
 // 3. lấy sid từ cookie để xác định client
@@ -11,25 +13,27 @@ async function handleSession(req, res, next) {
     _sid = randomUUID();
     const date = new Date();
     session = await sessionModal.create({ sid: _sid });
-
     date.setDate(date.getDate() + 7);
-
     res.set("Set-Cookie", `sid=${_sid}; path=/; httpOnly;expires=${date}`);
   }
 
-  let sessionData = JSON.parse(session.data ?? null) ?? {};
+  req.session = JSON.parse(session.data ?? null) ?? {};
 
-  req.session = {
-    get(key) {
-      return sessionData[key] ?? null;
-    },
-    set(key, value) {
-      sessionData[key] = value;
-      sessionModal.update(_sid, {
-        data: JSON.stringify(sessionData),
-      });
-    },
+  req.setFlash = (data) => {
+    req.session.flash = req.session.flash || [];
+    req.session.flash.push({
+      type: data.type,
+      message: data.message,
+    });
   };
+
+  const sessionId = _sid;
+
+  res.on("finish", async () => {
+    await sessionModal.update(sessionId, {
+      data: JSON.stringify(req.session),
+    });
+  });
 
   next();
 }

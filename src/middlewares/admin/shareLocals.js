@@ -1,15 +1,13 @@
 const usersService = require("../../services/users.service");
 
 async function shareLocals(req, res, next) {
-  const userId = req.session.get("userId");
+  const userId = req.session.userId;
   res.locals.auth = null;
 
   if (userId) {
-    const user = await usersService.getById(userId);
-    if (user) {
-      res.locals.auth = user;
-    }
+    res.locals.auth = await usersService.getById(userId);
   }
+
   next();
 }
 
